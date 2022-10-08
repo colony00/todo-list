@@ -21,3 +21,11 @@ Every TODO should have:
 3. Descripton of what needs to be done
 4. Time of creation
 5. Checkmark of completion
+
+## TODO's 😋
+
+- Create TODO's (object/class)
+- Show them with checkmarks
+- Remove them
+- Inspect further/expand
+- Add projects

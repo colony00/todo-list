@@ -29,3 +29,4 @@ Every TODO should have:
 - Remove them
 - Inspect further/expand
 - Add projects
+- Add localstorage so the data isn't lost on refresh

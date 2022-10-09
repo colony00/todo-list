@@ -24,7 +24,7 @@ Every TODO should have:
 
 ## TODO's 😋
 
-- Create TODO's (object/class)
+- ~~Create TODO's (object/class)~~
 - Show them with checkmarks
 - Remove them
 - Inspect further/expand

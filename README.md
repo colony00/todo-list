@@ -30,3 +30,4 @@ Every TODO should have:
 - Inspect further/expand
 - Add projects
 - Add localstorage so the data isn't lost on refresh
+- Do a little bit of styling

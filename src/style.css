@@ -6,3 +6,7 @@
   border: solid black 1px;
   padding: 5px;
 }
+
+.checked div {
+  text-decoration: dashed;
+}

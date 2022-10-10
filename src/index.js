@@ -1,41 +1,47 @@
-import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict'
 import './style.css';
+import {TODO} from './components/classes';
+import {DOMcreateTODO} from './components/DOMs';
 
-class TODO {
-  constructor(project,name,description,timeOfCreation,checked) {
-    this.project = project;
-    this.name = name;
-    this.description = description;
-    this.timeOfCreation = timeOfCreation;
-    this.checked = checked;
-  }
+const listTODOS = {
+  list: [],
 
-  get timeSince() {
-    return formatDistanceToNowStrict(this.timeOfCreation);
+  updateTODOlist: (todo) => {
+    // Should find and replace the updaten TODO
+  },
+
+  addToTODOlist: (todo) => {
+    list.push(todo);
+  },
+
+  findTODOfromID: (id) => {
+    const foundTodo = listTODOS.filter(todo => {
+      return todo.id === id;
+    })
+    return foundTodo
   }
 }
 
-const firstTODO = new TODO("Test Project","Test name","This is a TODO test",Date.now(),false);
-console.log(firstTODO)
+listTODOS.list.push(new TODO("Test Project","Test name","This is a TODO test",Date.now(),false));
 
-document.body.appendChild(DOMcreateTODO(firstTODO))
+displayUpdate()
 
-function DOMcreateTODO(todo) {
-  const card = document.createElement("div");
-  const project = elementTextContent("div",todo.project,"projectName");
-  const name = elementTextContent("div",todo.name,"name");
-  const description = elementTextContent("div",todo.description,"description");
-  const time = elementTextContent("div",todo.timeSince, "timeSince");
+const checkMarks = document.querySelectorAll(".checkmark");
+checkMarks.forEach( mark => {
+  mark.addEventListener('click', eventHandler.markDone)
+})
 
-  card.classList.add('todo');
-
-  card.append(project,name,description,time)
-  return card;
+function displayUpdate() {
+  document.body.replaceChildren();
+  listTODOS.list.forEach( todo => {
+    document.body.appendChild(DOMcreateTODO(todo));
+  })
 }
 
-function elementTextContent(elementType,content,className) {
-  const element = document.createElement(elementType);
-  element.textContent = content;
-  element.classList.add(className);
-  return element;
+const eventHandler = {
+  markDone: (e) => {
+    const checkID = findID();
+    const checkDOM = document.getElementById(e.target.parentNode.id)
+    checkDOM.classList.add('checked')
+    displayUpdate();
+  }
 }

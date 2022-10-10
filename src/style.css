@@ -8,5 +8,5 @@
 }
 
 .checked div {
-  text-decoration: dashed;
+  text-decoration: line-through;
 }

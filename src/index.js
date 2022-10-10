@@ -7,9 +7,6 @@ const eventHandler = {
     const _todo = listTODOS.findTODOfromID(e.target.parentNode.id);
     _todo.checked = !_todo.checked;
     displayUpdate();
-    console.log(listTODOS.list);
-    checkMarks = checkMarksHandler();
-    console.log(_todo)
   }
 }
 
@@ -37,13 +34,14 @@ listTODOS.addToTODOlist(new TODO("Test Project2","Test name2","This is a TODO te
 
 displayUpdate()
 
-let checkMarks = checkMarksHandler();
-
 function displayUpdate() {
   document.body.replaceChildren();
+
   listTODOS.list.forEach( todo => {
     document.body.appendChild(DOMcreateTODO(todo));
   })
+  
+  checkMarksHandler();
 }
 
 function checkMarksHandler() {

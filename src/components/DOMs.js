@@ -8,6 +8,7 @@ export function DOMcreateTODO(todo) {
   const time = elementTextContent("div",todo.timeSince, "timeSince");
   const checkMark = elementTextContent("input",todo.checked,"checkbox");
   checkMark.type = "checkbox";
+  const btnRemove = elementTextContent("button","Delete","btn-remove")
 
   if(todo.checked === true) {
     card.classList.add("checked");
@@ -15,7 +16,7 @@ export function DOMcreateTODO(todo) {
   }
   card.classList.add('todo');
 
-  card.append(project,name,description,time,checkMark)
+  card.append(project,name,description,time,checkMark,btnRemove)
   return card;
 }
 

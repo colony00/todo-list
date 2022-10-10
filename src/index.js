@@ -4,8 +4,13 @@ import {DOMcreateTODO} from './components/DOMs';
 
 const eventHandler = {
   markDone: (e) => {
-    const _todo = listTODOS.findTODOfromID(e.target.parentNode.id);
+    const _todo = listTODOS.returnTODOfromID(e.target.parentNode.id);
     _todo.checked = !_todo.checked;
+    displayUpdate();
+  },
+  remove: (e) => {
+    const _todo = listTODOS.returnTODOfromID(e.target.parentNode.id);
+    listTODOS.removeTODO(_todo.id)
     displayUpdate();
   }
 }
@@ -13,15 +18,18 @@ const eventHandler = {
 const listTODOS = {
   list: [],
 
-  updateTODOlist: (id,key,updateValue) => {
-    // This may not be needed.
+  removeTODO: (id) => {
+    const todoIndex = listTODOS.list.findIndex(todo => {
+      todo.id === id;
+    })
+    listTODOS.list.splice(todoIndex,1);
   },
 
   addToTODOlist: (todo) => {
     listTODOS.list.push(todo);
   },
 
-  findTODOfromID: (id) => {
+  returnTODOfromID: (id) => {
     const foundTodo = listTODOS.list.find(todo => {
       return todo.id === id;
     })
@@ -40,14 +48,13 @@ function displayUpdate() {
   listTODOS.list.forEach( todo => {
     document.body.appendChild(DOMcreateTODO(todo));
   })
-  
-  checkMarksHandler();
-}
 
-function checkMarksHandler() {
   const _checkMarks = document.querySelectorAll(".checkbox");
   _checkMarks.forEach( mark => {
     mark.addEventListener('click', eventHandler.markDone)
   })
-  return _checkMarks;
+  const _btnRemove = document.querySelectorAll(".btn-remove");
+  _btnRemove.forEach( btn => {
+    btn.addEventListener('click', eventHandler.remove)
+  })
 }

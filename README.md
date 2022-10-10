@@ -26,7 +26,7 @@ Every TODO should have:
 
 - ~~Create TODO's (object/class)~~
 - ~~Show them with checkmarks~~
-- Remove them
+- ~~Remove them~~
 - Inspect further/expand
 - Add projects
 - Add localstorage so the data isn't lost on refresh

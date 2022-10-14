@@ -1,12 +1,12 @@
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict'
 
 export class TODO {
-  constructor(project,name,description,timeOfCreation,checked) {
+  constructor(project,name,description) {
     this.project = project;
     this.name = name;
     this.description = description;
-    this.timeOfCreation = timeOfCreation;
-    this.checked = checked;
+    this.timeOfCreation = Date.now();
+    this.checked = false;
   }
 
   get id() {

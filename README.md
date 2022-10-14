@@ -28,6 +28,8 @@ Every TODO should have:
 - ~~Show them with checkmarks~~
 - ~~Remove them~~
 - Inspect further/expand
+  - (Edit)
 - Add projects
+  - (Select from projects when creating TODO)
 - Add localstorage so the data isn't lost on refresh
 - Do a little bit of styling

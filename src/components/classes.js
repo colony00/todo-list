@@ -1,12 +1,14 @@
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict'
 
+// Add dueDate and priority.
 export class TODO {
-  constructor(project,name,description) {
+  constructor(project,name,description,dueDate,priority) {
     this.project = project;
     this.name = name;
     this.description = description;
-    this.timeOfCreation = Date.now();
+    this.dueDate = dueDate;
     this.checked = false;
+    this.priority = priority;
   }
 
   get id() {
@@ -14,7 +16,7 @@ export class TODO {
     return _id.replaceAll(" ",'');
   }
 
-  get timeSince() {
-    return formatDistanceToNowStrict(this.timeOfCreation);
+  get timeToDate() {
+    return formatDistanceToNowStrict(this.dueDate);
   }
 }

@@ -29,7 +29,7 @@ Every TODO should have:
 - ~~Remove them~~
 - Inspect further/expand
   - (Edit)
-- Add projects
-  - (Select from projects when creating TODO)
+- ~~Add projects~~
+  - ~~(Select from projects when creating TODO)~~
 - Add localstorage so the data isn't lost on refresh
 - Do a little bit of styling

@@ -57,7 +57,12 @@ const eventHandler = {
 
 // Make this a class and move it to another file.
 const listTODOS = {
-  list: [],
+  list: function(){
+    if(localStorage.getItem('todoList')) {
+      return JSON.parse(localStorage.getItem('todoList'));
+    }
+    return [];
+  }(),
 
   removeTODO: (id) => {
     const todoIndex = listTODOS.list.findIndex(todo => {
@@ -74,6 +79,8 @@ const listTODOS = {
       return
     }
     listTODOS.list.push(todo);
+    console.log(listTODOS.list)
+    localStorage.setItem('todoList',JSON.stringify(listTODOS.list));
   },
 
   returnTODOfromID: (id) => {
@@ -99,9 +106,6 @@ const listTODOS = {
   }
 }
 
-
-listTODOS.addToTODOlist(new TODO("Test Project","Test name","This is a TODO test",new Date('1995-12-17T03:24:00'),"HIGH"));
-listTODOS.addToTODOlist(new TODO("Test Project2","Test name2","This is a TODO test",new Date('1995-12-17T03:24:00'),"LOW"));
 
 displayUpdate()
 

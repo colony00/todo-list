@@ -28,9 +28,10 @@ Every TODO should have:
 - ~~Create TODO's (object/class)~~
 - ~~Show them with checkmarks~~
 - ~~Remove them~~
-- Inspect further/expand
-  The expanded todo should have the edit button. The edit DOM should either replace all other things or work in-place.
-  - (Edit)
+- ~~Inspect further/expand~~
+  ~~The expanded todo should have the edit button. The edit DOM should either replace all other things or work in-place.~~
+  - ~~(Edit)~~
+- Better ID so project doesnt forget roots when renamed.
 - ~~Add projects~~
   - ~~(Select from projects when creating TODO)~~
 - Add localstorage so the data isn't lost on refresh

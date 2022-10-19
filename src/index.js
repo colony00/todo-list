@@ -43,15 +43,14 @@ const eventHandler = {
 
   editTodo: (e) => {
     const _todo = listTODOS.returnTODOfromID(e.target.parentNode.id);
-    console.log()
     e.target.parentNode.parentNode.replaceChild(createTODO_DOM(e.target.param,_todo),e.target.parentNode);
-    events()
+    events();
   },
 
   newTodo: (e) => {
     const _btn = e.target;
     _btn.parentNode.replaceChild(createTODO_DOM(e.currentTarget.param),_btn);
-    events()
+    events();
   }
 }
 
@@ -72,6 +71,7 @@ const listTODOS = {
       return _todo.id === todo.id
     })) {
       listTODOS.list[listTODOS.list.indexOf(listTODOS.returnTODOfromID(todo.id))] = todo;
+      return
     }
     listTODOS.list.push(todo);
   },

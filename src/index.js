@@ -1,6 +1,6 @@
 import './style.css';
 import {TODO} from './components/classes';
-import {createTODO_DOM, projectButtons_DOM, TODO_DOM} from './components/DOMs';
+import {createTODO_DOM, projectButtons_DOM, expandedTODO_DOM, todoDOM, columnNamesDOM} from './components/DOMs';
 
 // How can this be moved to another file. No need to have it in the main file.
 const eventHandler = {
@@ -23,7 +23,7 @@ const eventHandler = {
     listTODOS.addToTODOlist(_todo);
     displayUpdate();
   },
-  
+
   addProjectToURL: (e) => {
     const project = e.target.textContent
     if(project !== 'Home') {
@@ -33,6 +33,18 @@ const eventHandler = {
       return
     }
     window.location.search = ''
+  },
+
+  expandTodo: (e) => {
+    const _todo = listTODOS.returnTODOfromID(e.target.parentNode.id);
+    e.target.parentNode.parentNode.replaceChild(expandedTODO_DOM(_todo),e.target.parentNode);
+    events()
+  },
+
+  editTodo: (e) => {
+    const _todo = listTODOS.returnTODOfromID(e.target.parentNode.id);
+    e.target.parentNode.parentNode.replaceChild(createTODO_DOM([],_todo),e.target.parentNode);
+    events()
   }
 }
 
@@ -82,8 +94,6 @@ displayUpdate()
 function displayUpdate() {
   document.body.replaceChildren();
 
-  document.body.appendChild(projectButtons_DOM(listTODOS.returnProjectNames()))
-
   let datalistOptions;
   let project;
   const urlParams = window.location.search
@@ -99,18 +109,34 @@ function displayUpdate() {
     datalistOptions = `<option value="${project}" >`;
   }
   
-  document.body.append(createTODO_DOM(datalistOptions))
+  const title = document.createElement("h1");
+  title.textContent = project;
+  document.body.append(title)
 
   const todoContainer = document.createElement("div")
   todoContainer.classList.add("todo-container");
+  todoContainer.append(columnNamesDOM())
 
   const todoList = project === 'default' ? listTODOS.list : listTODOS.returnTODOSinProject(project)
   todoList.forEach( todo => {
-    todoContainer.appendChild(TODO_DOM(todo));
+    todoContainer.appendChild(todoDOM(todo));
   })
-  document.body.append(todoContainer)
+
+  document.body.append(projectButtons_DOM(listTODOS.returnProjectNames()),title,todoContainer)
 
   // Node selector and appending eventlisteners
+  events()
+}
+
+function events() {
+  const _edit = document.querySelectorAll(".edit");
+  _edit.forEach( edit => {
+    edit.addEventListener('click', eventHandler.editTodo)
+  });
+  const _expand = document.querySelectorAll(".expand");
+  _expand.forEach( edit => {
+    edit.addEventListener('click', eventHandler.expandTodo)
+  })
   const _checkMarks = document.querySelectorAll(".checkbox");
   _checkMarks.forEach( mark => {
     mark.addEventListener('click', eventHandler.markDone)
@@ -119,10 +145,14 @@ function displayUpdate() {
   _btnRemove.forEach( btn => {
     btn.addEventListener('click', eventHandler.remove)
   })
-  const _form = document.forms["create-todo"];
-  _form.addEventListener('submit', eventHandler.getForm,false)
+  try{
+    const _form = document.forms["create-todo"];
+    _form.addEventListener('submit', eventHandler.getForm,false)
+  } catch {
+    console.log('No form')
+  }
   const _projects = document.querySelectorAll(".button-container button")
   _projects.forEach( btn => {
-    btn.addEventListener('click',eventHandler.addProjectToURL)
+    btn.addEventListener('click', eventHandler.addProjectToURL)
   })
 }

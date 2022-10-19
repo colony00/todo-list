@@ -19,8 +19,9 @@ Every TODO should have:
 1. Project of TODO
 2. Name
 3. Descripton of what needs to be done
-4. Time of creation
-5. Checkmark of completion
+4. Due Date
+5. Priority - HiGH, MEDIUM or LOW
+6. Checkmark of completion
 
 ## TODO's 😋
 
@@ -28,6 +29,7 @@ Every TODO should have:
 - ~~Show them with checkmarks~~
 - ~~Remove them~~
 - Inspect further/expand
+  The expanded todo should have the edit button. The edit DOM should either replace all other things or work in-place.
   - (Edit)
 - ~~Add projects~~
   - ~~(Select from projects when creating TODO)~~

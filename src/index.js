@@ -43,10 +43,18 @@ const eventHandler = {
 
   editTodo: (e) => {
     const _todo = listTODOS.returnTODOfromID(e.target.parentNode.id);
-    e.target.parentNode.parentNode.replaceChild(createTODO_DOM([],_todo),e.target.parentNode);
+    console.log()
+    e.target.parentNode.parentNode.replaceChild(createTODO_DOM(e.target.param,_todo),e.target.parentNode);
+    events()
+  },
+
+  newTodo: (e) => {
+    const _btn = e.target;
+    _btn.parentNode.replaceChild(createTODO_DOM(e.currentTarget.param),_btn);
     events()
   }
 }
+
 
 // Make this a class and move it to another file.
 const listTODOS = {
@@ -60,6 +68,11 @@ const listTODOS = {
   },
 
   addToTODOlist: (todo) => {
+    if(listTODOS.list.some(_todo => {
+      return _todo.id === todo.id
+    })) {
+      listTODOS.list[listTODOS.list.indexOf(listTODOS.returnTODOfromID(todo.id))] = todo;
+    }
     listTODOS.list.push(todo);
   },
 
@@ -86,10 +99,12 @@ const listTODOS = {
   }
 }
 
+
 listTODOS.addToTODOlist(new TODO("Test Project","Test name","This is a TODO test",new Date('1995-12-17T03:24:00'),"HIGH"));
 listTODOS.addToTODOlist(new TODO("Test Project2","Test name2","This is a TODO test",new Date('1995-12-17T03:24:00'),"LOW"));
 
 displayUpdate()
+
 
 function displayUpdate() {
   document.body.replaceChildren();
@@ -121,18 +136,28 @@ function displayUpdate() {
   todoList.forEach( todo => {
     todoContainer.appendChild(todoDOM(todo));
   })
+  const btnNewTODO = document.createElement("button");
+  btnNewTODO.classList.add("new-todo");
+  btnNewTODO.textContent = "New";
 
-  document.body.append(projectButtons_DOM(listTODOS.returnProjectNames()),title,todoContainer)
+  document.body.append(projectButtons_DOM(listTODOS.returnProjectNames()),title,todoContainer,btnNewTODO)
 
   // Node selector and appending eventlisteners
-  events()
+  events(datalistOptions)
 }
 
-function events() {
+
+function events(datalistOptions) {
+  const _new = document.querySelectorAll(".new-todo");
+  _new.forEach( n => {
+    n.addEventListener('click', eventHandler.newTodo)
+  })
+  _new.param = datalistOptions;
   const _edit = document.querySelectorAll(".edit");
   _edit.forEach( edit => {
     edit.addEventListener('click', eventHandler.editTodo)
   });
+  _edit.param = datalistOptions;
   const _expand = document.querySelectorAll(".expand");
   _expand.forEach( edit => {
     edit.addEventListener('click', eventHandler.expandTodo)

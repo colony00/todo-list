@@ -64,10 +64,6 @@ export function createTODO_DOM(projectOptions,prev=emptyTodo) {
   </fieldset>
   `;
   
-  if(prev === emptyTodo) {
-    console.log("I'm new")
-  }
-
   return form
 }
 
